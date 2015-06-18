@@ -1,0 +1,40 @@
+########################################
+# Fixed
+########################################
+
+
+1. when click on search button
+    => show search box
+
+   then click subjects button
+    => still show search box
+
+=> that's because the way we define search-box in createSubjects
+
+   1. should break it into a function
+        - toggle hidden class
+
+
+
+
+
+########################################
+# Bug
+########################################
+
+1. the value of search box hasn't gone
+   after click to other ajax request like list subjects, list categories
+   then comeback to search page
+   the search term is still there
+
+   I want these following:
+       + when click to other ajax request like list subjects, list categories
+         then click again search page,
+         the search term gone
+
+       + but when we still in search page
+         & search a subject
+         it ajax & return result
+         the search term is still there
+
+
