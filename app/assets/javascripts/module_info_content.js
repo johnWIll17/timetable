@@ -1,9 +1,18 @@
 CORE.createModule('info-content', function(sb) {
     //local variables
-    var infoContent;
+    var infoContent,
+        timetable = sb.query('#info-content #timetable'),
+        eleDragged = null;
     // var ajaxObj = sb.helperObj['ajaxObj'].instance;
 
     //local functions
+    var addDraggable = function() {
+        var tdEles = sb.queryAll('#info-content #timetable td');
+        for (var i=0, len = tdEles.length; i < len; i++) {
+            tdEles[i].setAttribute('draggable', 'true');
+        }
+    };
+
     var createSubjectDetails = function(xhr) {
         var divBriefEle, divSummaryEle, divButtonEle, divEle,
             imgEle, h3Ele, pEle, buttonEle;
@@ -89,15 +98,59 @@ CORE.createModule('info-content', function(sb) {
     };
 
 
+    //drop to timetable
+    //========================================
+    timetable.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('he');
+    });
+
+    timetable.addEventListener('drop', function(e) {
+        if (e.target.tagName === 'TD') {
+            e.target.innerHTML = e.dataTransfer.getData('text');
+            if (eleDragged.parentNode !== null) {
+                eleDragged.parentNode.removeChild(eleDragged);
+            }
+            // if (tdDragged !== null) {
+            //     console.log('why?');
+            //     //tdDragged.parentNode.removeChild(tdDragged);// innerHTML = '';
+            //     tdDragged.innerHTML = '';
+            // }
+        } else {
+            console.warn('drop into th not td');
+        }
+    });
+
+    var dragDrop = function(data) {
+        eleDragged = data['eleDragged'];
+    };
+    //========================================
+
+    //drag from timetable
+    //========================================
+    var dragStart = function(e) {
+        var tdDragged = e.target;
+    };
+
+    //========================================
+
+
+    //return module object
     return {
         init: function() {
+            addDraggable();
             infoContent = sb.query('#info-content');
 
-            infoContent.addEventListener('click', buttonClicking);
+            //infoContent.addEventListener('click', buttonClicking);
+            sb.addEvent(infoContent, 'click', buttonClicking);
+            sb.addEvent(timetable, 'dragStart', dragStart);
+
             sb.listen({
                 //'button-clicking': this.buttonClicking,
                 'click-list-item': updateList,
-                'click-ok-icon': updateList
+                'click-ok-icon': updateList,
+                'drag-drop': dragDrop
             });
         }
         // buttonClicking: function(data) {

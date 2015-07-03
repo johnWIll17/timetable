@@ -23,6 +23,9 @@ var Sandbox = {
             query: function(selector) {
                 return core.dom.querySelector(selector);
             },
+            queryAll: function(selector) {
+                return core.dom.queryAll(selector);
+            },
             find: function(selector) {
                 return core.dom.query('#' + moduleSelector + ' ' + selector)
                 //return document.querySelector('#' + moduleSelector + ' ' + selector)

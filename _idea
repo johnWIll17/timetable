@@ -1,0 +1,18 @@
+1.
+  when move subject from list to timetable
+  the subject is removed from the CURRENT list
+
+  BUT
+  if we click to icons in filters-bar
+
+  => we got all subjects come back (including the one that we have already moved to timetable)
+     because each time we click on icons in filters-bar
+     we call AJAX to full subjects /or/ subjects of a category ...
+
+
+=> SOLUTION
+
+   write a function in each callback AJAX function above
+   check to see if we have text in timetable
+   just pull subjects that is NOT in timetable (check by subject_name)
+
