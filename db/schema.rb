@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616084815) do
+ActiveRecord::Schema.define(version: 20150629093010) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name"
@@ -27,6 +27,20 @@ ActiveRecord::Schema.define(version: 20150616084815) do
     t.text     "description"
     t.integer  "credit"
     t.string   "staff"
+    t.string   "day"
+    t.integer  "period"
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",            null: false
+    t.string   "crypted_password"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "auth_token"
+    t.string   "test"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

@@ -1,103 +1,171 @@
+<%= current_user.inspect %>
+
+
 <div class='container'>
   <nav id='filters-bar'>
-    <ul>
-      <li><span id='list-categories' class='glyphicon glyphicon-th-large'></span></li>
-      <li><span id='list-subjects'   class='glyphicon glyphicon-file'></span></li>
-      <li><span id='search-subjects' class='glyphicon glyphicon-search'></span></li>
-      <li><span id='show-timetables' class='glyphicon glyphicon-user'></span></li>
+    <ul class='group'>
+      <li data-job='list-categories'><span id='list-categories' class='glyphicon glyphicon-th-large'></span></li>
+      <li data-job='list-subjects'><span id='list-subjects'   class='glyphicon glyphicon-file'></span></li>
+      <li data-job='search-subjects'><span id='search-subjects' class='glyphicon glyphicon-search'></span></li>
+      <li data-job='show-timetables'><span id='show-timetables' class='glyphicon glyphicon-user'></span></li>
+      <li><%= link_to 'Logout', log_out_path, method: :delete %></li>
     </ul>
   </nav>
+
   <div id='main-content'>
-      
     <div id='main-sidebar'>
       <div id='sidebar-heading'>
-        <h2><span class='glyphicon glyphicon-arrow-left'></span>
-            <span id='sidebar-heading-content'>Common general subjects</span>
+        <h2>
+          <span class='glyphicon glyphicon-arrow-left'></span>
+          <span id='sidebar-heading-content'>All Subjects</span>
         </h2>
       </div>
-      <p id='search-field' class='hidden'>
-      <span class='glyphicon glyphicon-search'></span>
-      <input type="text" name="search-box" id="search-box">
-      </p>
 
-      <div id='sidebar-subjects'>
-        <ul id='list-items'>
-          <!-- <li><span class='glyphicon glyphicon&#45;folder&#45;open orange'></span> History and Culture</li> -->
-          <!-- <li><span class='glyphicon glyphicon&#45;folder&#45;open green'></span> Religion</li> -->
-          <!-- <li><span class='glyphicon glyphicon&#45;folder&#45;open purple'></span> Math</li> -->
-        </ul>
+      <div id='sidebar-content'>
+        <div id='sidebar-search'>
+          <span class='glyphicon glyphicon-search'></span>
+          <input type="text" name="search-box" id="search-box" placeholder='History'>
+        </div>
+
+        <!-- <div id='sidebar&#45;items' class='height&#45;445 bg&#45;white'> -->
+        <div id='sidebar-items' class='height-445'>
+          <ul id='list-items'>
+            <li>
+              <span class='glyphicon glyphicon-list-alt orange left icon-left'></span>
+              <div id='list-item-content'>
+                <p class='subject-title'>History and Culture</p>
+                <p class='subject-details'>
+                  <span>Credit: 2</span><br>
+                  <span>Staff: Suzuki Tarou</span>
+                </p>
+              </div>
+              <span class='glyphicon glyphicon-info-sign icon-right'></span>
+            </li>
+            <li>
+              <span class='glyphicon glyphicon-folder-open green icon icon-left'></span>
+              <p>Religion</p>
+            </li>
+            <li>
+              <span class='glyphicon glyphicon-list-alt orange left icon-left'></span>
+              <div id=list-item-content>
+                <p class='subject-title'>History and Culture</p>
+                <p class='subject-details'>
+                  <span>Credit: 2</span><br>
+                  <span>Staff: Suzuki Tarou</span>
+                </p>
+              </div>
+              <span class='glyphicon glyphicon-info-sign icon-right'></span>
+            </li>
+            <li>
+              <span class='glyphicon glyphicon-list-alt orange left icon-left'></span>
+              <div id=list-item-content>
+                <p class='subject-title'>History and Culture</p>
+                <p class='subject-details'>
+                  <span>Credit: 2</span><br>
+                  <span>Staff: Suzuki Tarou</span>
+                </p>
+              </div>
+              <span class='glyphicon glyphicon-info-sign icon-right'></span>
+            </li>
+            <li>
+              <span class='glyphicon glyphicon-list-alt orange left icon-left'></span>
+              <div id=list-item-content>
+                <p class='subject-title'>History and Culture</p>
+                <p class='subject-details'>
+                  <span>Credit: 2</span><br>
+                  <span>Staff: Suzuki Tarou</span>
+                </p>
+              </div>
+              <span class='glyphicon glyphicon-info-sign icon-right'></span>
+            </li>
+            <li>
+              <span class='glyphicon glyphicon-list-alt orange left icon-left'></span>
+              <div id=list-item-content>
+                <p class='subject-title'>History and Culture</p>
+                <p class='subject-details'>
+                  <span>Credit: 2</span><br>
+                  <span>Staff: Suzuki Tarou</span>
+                </p>
+              </div>
+              <span class='glyphicon glyphicon-info-sign icon-right'></span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div id='main-timetable'>
-      <div id='timetable-heading'>
-        <h1>Current Timetable</h1>
+    <div id='main-info'>
+      <div id='info-heading'>
+        <h2>Current Timetable</h2>
       </div>
-      <table id='timetable'>
-        <tr class='week-day'>
-          <th class='lesson-id'></th>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
-          <th>Sat</th>
-        </tr>
-        <tr>
-          <th>1</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>2</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>3</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>4</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>5</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>6</th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
+      <div id='info-content'>
+        <table id='timetable'>
+          <tr class='weekday'>
+            <th class='lesson-id'></th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+          </tr>
+          <tr>
+            <th>1</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>3</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>4</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>5</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>6</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>
+

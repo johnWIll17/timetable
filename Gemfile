@@ -47,3 +47,5 @@ end
 gem 'rails_admin'
 gem 'responders'
 gem 'bootstrap-sass'
+gem 'sorcery'
+gem 'validates_email_format_of'

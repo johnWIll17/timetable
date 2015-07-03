@@ -15,4 +15,9 @@
 //= require turbolinks
 //= require core
 //= require sandbox
-//= require modules
+//= require module_filters_bar
+//= require module_info_content
+//= require module_info_heading
+//= require module_list_items
+//= require module_sidebar_heading
+//= require module_sidebar_search

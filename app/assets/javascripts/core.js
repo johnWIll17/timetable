@@ -1,20 +1,36 @@
 var CORE = (function() {
-    var moduleData = {};
+    var moduleData = {},
+        helperObj = {};
 
     return {
-        create_module: function(moduleId, creator) {
-            // var temp;
-            // if (typeof moduleId === 'string' && typeof creator === 'function') {
-            //     console.log('wtf');
-            //     temp = creator(Sandbox.create(this, moduleId));
-            //     if (temp.init && typeof temp.init === 'function' && temp.destroy && typeof temp.destroy === 'function') {
-            //         temp = null;
-                    moduleData[moduleId] = {
-                        create : creator,
-                        instance : null
-                    };
-            //     }
-            // }
+
+        helperObj: helperObj,
+
+        createHelperObj: function(objName, creator) {
+            helperObj[objName] = {
+                create: creator,
+                instance: null
+            };
+        },
+        createModule: function(moduleId, creator) {
+            moduleData[moduleId] = {
+                create : creator,
+                instance : null
+            };
+        },
+        startObj: function(objName) {
+            var obj = helperObj[objName];
+            if (obj) {
+                obj.instance = obj.create(Sandbox.create(this));
+            }
+        },
+        startAllObj: function() {
+            var objName;
+            for (objName in helperObj) {
+                if ( helperObj.hasOwnProperty(objName) ) {
+                    this.startObj(objName);
+                }
+            }
         },
         start: function(moduleId) {
             var mod = moduleData[moduleId];
@@ -31,19 +47,38 @@ var CORE = (function() {
                 }
             }
         },
-        triggerEvent: function(evt) {
+
+        registerEvents : function (evts, mod) {
+            if (this.isObj(evts) && mod) {
+                if (moduleData[mod]) {
+                    moduleData[mod].events = evts;
+                } else {
+                    this.log(1, "");
+                }
+            } else {
+                this.log(1, "");
+            }
+        },
+        triggerEvent : function (evt) {
             var mod;
             for (mod in moduleData) {
-                mod = moduleData[mod];
-                if (mod.events) {
-                    mod.events[evt.type](evt.data);
+                if (moduleData.hasOwnProperty(mod)){
+                    mod = moduleData[mod];
+                    if (mod.events && mod.events[evt.type]) {
+                        mod.events[evt.type](evt.data);
+                    }
                 }
             }
         },
-
-        registerEvent: function(evt, mod) {
-            if (this.isObj(evt) && mod) {
-                moduleData[mod].events = evt;
+        dom: {
+            querySelector: function(selector) {
+                return document.querySelector(selector);
+            },
+            query: function(selector) {
+                return document.querySelector(selector);
+            },
+            queryAll: function(selector) {
+                return document.querySelectorAll(selector);
             }
         },
         isArray: function(value) {
@@ -53,7 +88,7 @@ var CORE = (function() {
             return false;
         },
         isObj: function(value) {
-            if ( typeof value === 'Object' && !(value instanceof Array) ) {
+            if ( (typeof value).toLowerCase() === 'Object'.toLowerCase() && !(value instanceof Array) ) {
                 return true;
             }
             return false;

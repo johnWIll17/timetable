@@ -1,0 +1,6 @@
+1. after drag subject from timetable to list-item
+     + need add attribute 'draggable' to that list-item
+       which has just been added to list-item
+
+2. after drag subject between cells in timetable
+     + remove the subject from old cell

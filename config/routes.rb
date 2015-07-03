@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :sessions, only: [:new, :create, :destroy]
+  get '/log_in', to: 'sessions#new', as: :log_in
+  delete '/log_out', to: 'sessions#destroy', as: :log_out
+
   root 'timetables#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
